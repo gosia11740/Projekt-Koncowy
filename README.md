@@ -1,3 +1,3 @@
 # Projekt-Koncowy
  This is my Final Project. I made it to pass a course in CodersLab. 
- Tt is a web app to see how human muscles work and look.
+It is a web application for planning your training sessions. I made it mainly to practice tests on it.
