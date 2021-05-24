@@ -15,10 +15,36 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from atlas import views as at_views
+from atlas.views import (
+    IndexView,
+    HomePage,
+    Dashboard,
+    ExercisesDetails,
+    ExercisesList,
+    ExercisesAdd,
+    ExercisesModify,
+    PlanDetails,
+    PlanList,
+    PlanAdd,
+    PlanModify,
+    PlanAddExercises,
+)
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('welcome/', at_views.HelloView.as_view(), name = 'welcome'),
+    path('index/', IndexView.as_view(), name='index'),
+    path('', HomePage.as_view(), name='home-page'),
+    path('main/', Dashboard.as_view(), name='dashboard'),
+    path('exercises/list/', ExercisesList.as_view(), name='exercises-list'),
+    path('exercises/add/', ExercisesAdd.as_view(), name='exercise-add'),
+    path('exercises/<int:exercises_id>/', ExercisesDetails.as_view(), name='exercises-details'),
+    path('exercises/modify/<int:exercises_id>/', ExercisesModify.as_view(), name='exercises-modify'),
+    path('plan/details/', PlanDetails.as_view(), name='plan-details'),
+    path('plan/list/', PlanList.as_view(), name='plan-list'),
+    path('plan/add/', PlanAdd.as_view(), name='plan-add'),
+    path('plan/add-exercises/', PlanAddExercises.as_view(), name='plan-add-exercises'),
+    path('plan/modify/<int:plan_id>/', PlanModify.as_view(), name='plan-modify'),
+    path('plan/<int:plan_id>/', PlanDetails.as_view(), name='plan-details'),
+
 ]
