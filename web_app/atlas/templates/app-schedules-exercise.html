@@ -1,0 +1,61 @@
+{% extends "__base__.html" %}
+{% block title %}{% endblock %}
+{% block content %}
+<div class="dashboard-content border-dashed p-3 m-4 view-height">
+    <div class="row border-bottom border-3 p-1 m-1">
+        <div class="col noPadding">
+            <h3 class="color-header text-uppercase">DODAJ ĆWICZENIA DO PLANU</h3>
+        </div>
+        <div class="col d-flex justify-content-end mb-2 noPadding">
+            <button class="btn btn-success rounded-0 pt-0 pb-0 pr-4 pl-4" form="exercisesPlan" type="submit">Zapisz</button>
+        </div>
+    </div>
+
+    <div class="schedules-content">
+        <form action="" method="post" id="exercisesPlan"> {% csrf_token %}
+            <div class="form-group row">
+                <label for="choosePlan" class="col-sm-2 label-size col-form-label">Wybierz plan</label>
+                <div class="col-sm-3">
+                    <select name="choosePlan" class="form-control" id="choosePlan" required>
+                        {% for plan in plans %}
+                            <option value="{{ plan.id }}">{{ plan.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="name" class="col-sm-2 label-size col-form-label">Nazwa ćwiczenia</label>
+                <div class="col-sm-10">
+                    <input name="name" type="text" class="form-control" value="" id="name" placeholder="Nazwa ćwiczenia" required>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="mealNumber" class="col-sm-2 label-size col-form-label">Numer ćwiczenia</label>
+                <div class="col-sm-2">
+                    <input name="mealNumber" type="number" min="1" max="10" step="1" class="form-control" value="" id="mealNumber" placeholder="Numer ćwicenia">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="exercises" class="col-sm-2 label-size col-form-label">Ćwiczenie</label>
+                <div class="col-sm-4">
+                    <select name="exercises" class="form-control" id="exercises">
+                        {% for exercise in exercises %}
+                            <option value="{{ exercises.id }}">{{ exercises.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="day" class="col-sm-2 label-size col-form-label">Dzień</label>
+                <div class="col-sm-2">
+                    <select name="day" class="form-control" id="day">
+                        {% for day in days %}
+                        <option value="{{ day.id }}">{{ day.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock content %}

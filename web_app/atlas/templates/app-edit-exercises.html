@@ -1,0 +1,58 @@
+{% extends "__base__.html" %}
+{% block title %}{% endblock title %}
+{% block content %}
+<div class="dashboard-content border-dashed p-3 m-4 view-height">
+    <form action="" method="POST" id="form-add-exercises">
+            {% csrf_token %}
+            <div class="row border-bottom border-3">
+                <div class="col">
+                    <h3 class="color-header text-uppercase">Edycja ćwiczenia</h3>
+                </div>
+                <div class="col d-flex justify-content-end mb-2">
+                    <button type="submit" form="form-add-exercises" class="btn btn-color rounded-0 pt-0 pb-0 pr-4 pl-4">Wyślij</button>
+                </div>
+            </div>
+
+        <table class="table borderless">
+            <tbody>
+            <tr class="d-flex">
+                <th scope="row" class="col-2">Nazwa Ćwiczenia</th>
+                <td class="col-7">
+                    <input required class="w-100 p-1" name="name-exercises" id="name-exervises" value="{{ recent_exercises.name }}">
+                </td>
+            </tr>
+            <tr class="d-flex">
+                    <th scope="row" class="col-2">ID ćwiczenia</th>
+                    <td class="col-7">
+                        <div>{{ recent_exercises.id }}</div>
+                        <input required class="w-100 p-1" type="hidden" name="id" id="id" value="{{ recent_exercises.id }}">
+                    </td>
+                </tr>
+            <tr class="d-flex">
+                <th scope="row" class="col-2">Opis ćwiczenia</th>
+                <td class="col-7">
+                    <textarea class="w-100 p-1" name="description" id="description" rows="5">{{ recent_exercises.description }}</textarea>
+                </td>
+            </tr>
+            <tr class="d-flex">
+                <th scope="row" class="col-2">Czas wykonania</th>
+                <td class="col-3">
+                    <input required class="p-1" type="number" name="exercises_time" id="exercises_time" value="{{ recent_exercises.exercises_time }}">
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+            <div class="col-2"></div>
+            <div class="col-5 border-bottom border-3">
+                <h3 class="text-uppercase">Szczególy</h3>
+            </div>
+        </div>
+        <div class="row d-flex">
+            <div class="col-5 p-4">
+                <textarea required class="w-100 p-1" name="detalis" id="detalis" rows="10">{{ recent_exercises.detalis }}</textarea>
+            </div>     
+    </form>
+</div>
+
+{% endblock content %}

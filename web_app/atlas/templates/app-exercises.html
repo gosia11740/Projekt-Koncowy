@@ -1,0 +1,65 @@
+{% extends "__base__.html" %}
+{% block title %}{% endblock %}
+{% block content %}
+<div class="dashboard-content border-dashed p-3 m-4 view-height">
+
+    <div class="row border-bottom border-3 p-1 m-1">
+        <div class="col noPadding"><h3 class="color-header text-uppercase">Lista Ćwiczeń</h3></div>
+        <div class="col noPadding d-flex justify-content-end mb-2">
+            <a href="/plan/add-exercises" class="btn btn-success rounded-0 pt-0 pb-0 pr-4 pl-4">Dodaj ćwiczenie do planu</a>
+            <a href="/exercises/add/" class="btn btn-success rounded-0 pt-0 pb-0 pr-4 pl-4">Dodaj ćwiczenie</a></div>
+    </div>
+
+    <table class="table border-bottom">
+
+        <thead>
+        <tr class="d-flex text-color-darker">
+            <th scope="col" class="col-2">NAZWA</th>
+            <th scope="col" class="col-7">OPIS</th>
+            <th scope="col" class="col-2 center">ILOŚĆ POWTÓRZEŃ</th>
+        </tr>
+        </thead>
+        <tbody class="text-color-lighter">
+
+        {% for exercise in exercises %}
+        <tr class="d-flex">
+            <td class="col-2">{{ exercises.name }} ({{ exercises.votes }} głosy)</td>
+            <td class="col-7">{{ exercises.description }}</td>
+            <td class="col-2 d-flex align-items-center justify-content-center flex-wrap">
+                <a href="#" class="btn btn-danger rounded-0 text-light m-1">Usuń</a>
+                <a href="/exercises/{{ exercises.id }}" class="btn btn-info rounded-0 text-light m-1">Szczegóły</a>
+                <a href="/exercises/modify/{{ exercises.id }}" class="btn btn-warning rounded-0 text-light m-1">Edytuj</a>
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <nav>
+        {% if recipes.has_other_pages %}
+            <ul class="pagination">
+                {% if exercises.has_previous %}
+                    <li><a href="?page={{ exercises.previous_page_number }}"> &laquo; Poprzednia</a></li>
+                {% else %}
+                    <li class="disabled"><span>&laquo; Poprzednia</span></li>
+                {% endif %}
+
+                {% for i in exercises.paginator.page_range %}
+                    {% if recipes.number == i %}
+                        <li class="active">|<span>{{ i }} <span class="sr-only">(current)</span></span></li>
+                    {% else %}
+                        <li>|<a href="?page={{ i }}">{{ i }}</a></li>
+                    {% endif %}
+                {% endfor %}
+
+                {% if exercises.has_next %}
+                    <li>|<a href="?page={{ exercises.next_page_number }}">Następna &raquo;</a></li>
+                {% else %}
+                    <li class="disabled">|<span>Następna&raquo;</span></li>
+                {% endif %}
+            </ul>
+        {% endif %}
+    </nav>
+
+</div>
+{% endblock content %}
